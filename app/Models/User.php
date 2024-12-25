@@ -15,18 +15,26 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
+    protected $primaryKey = 'user_id';
+    
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',   
+        'date_of_birth',        
+        'profile_photo',  
+        'about_me',
         'email',
         'password',
+        'role',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -44,5 +52,40 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function newsItems()
+    {
+        return $this->hasMany(NewsItem::class, 'user_id');
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Chatmessage::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Chatmessage::class, 'receiver_id');
+    }
+
+    public function availabilities()
+    {
+        return $this->hasMany(Availability::class, 'user_id');
+    }
+
+    public function reservationsAsTutor()
+    {
+        return $this->hasMany(Reservation::class, 'tutor_id');
+    }
+
+    public function reservationsAsClient()
+    {
+        return $this->hasMany(Reservation::class, 'client_id');
+    }
+
+    public function tutorCourses()
+    {
+        return $this->belongsToMany(Course::class, 'tutor_course', 'user_id', 'course_id');
     }
 }
