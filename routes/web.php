@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +18,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::get('/user/{id}', [AdminController::class, 'show'])->name('user.show');
+    Route::put('/users/{id}', [UserController::class, 'updateUser'])->name('user.updateRole');
+    Route::post('/user', [AdminController::class, 'store'])->name('user.store');
+    Route::get('/create', [AdminController::class, 'create'])->name('create');
+    Route::get('/courses', [AdminController::class, 'courses'])->name('courses');
+    Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
 });
 
 require __DIR__.'/auth.php';
