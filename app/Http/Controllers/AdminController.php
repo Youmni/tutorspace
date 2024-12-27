@@ -14,9 +14,18 @@ use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-    public function users()
+    public function users(Request $request)
     {
-        $users = User::all();
+        $search = $request->input('search');
+    
+        $users = User::query()
+            ->where('user_id', 'LIKE', "$search")
+            ->orWhere('first_name', 'LIKE', "%{$search}%")
+            ->orWhere('last_name', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%")
+            ->orWhere('role', 'LIKE', "%{$search}%")
+            ->get();
+    
         return view('admin.users', compact('users'));
     }
 

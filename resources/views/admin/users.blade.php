@@ -6,13 +6,17 @@
         <a href="{{ route('admin.create') }}" class="underline">Create User</a>    
     </div>
 
-    <div class="mb-4">
-        <input type="text" id="search" placeholder="Search users..." class="p-2 border rounded w-full">
-    </div>
+    <form method="get" action="{{ route('admin.users') }}" class="mb-4 flex gap-2">
+        <input type="text" name="search" placeholder="Search users..." value="{{ request('search') }}" class="border rounded py-2 px-4 w-full">
+        <button type="submit" class="bg-navy-500 text-white py-2 px-4 rounded hover:bg-blue-700">Search</button>
+    </form>
 
+    @if($users->isEmpty())
+        <p class="text-gray-500">No users available.</p>
+    @else
     <div class="overflow-y-auto max-h-96">
-        <table class="min-w-full bg-white border border-gray-200">
-            <thead>
+        <table class="min-w-full border bg-white border-gray-200">
+            <thead class="bg-gray-100">
                 <tr>
                     <th class="py-2 px-4 border-b text-start">ID</th>
                     <th class="py-2 px-4 border-b text-start">First Name</th>
@@ -23,7 +27,7 @@
             </thead>
             <tbody id="userTable">
                 @foreach ($users as $user)
-                    <tr class="user-row cursor-pointer" data-url="{{ route('admin.user.show', $user->user_id) }}">
+                    <tr class="user-row cursor-pointer hover:bg-gray-50" data-url="{{ route('admin.user.show', $user->user_id) }}">
                         <td class="py-2 px-4 border-b text-start">{{ $user->user_id }}</td>
                         <td class="py-2 px-4 border-b text-start">{{ $user->first_name }}</td>
                         <td class="py-2 px-4 border-b text-start">{{ $user->last_name }}</td>
@@ -34,22 +38,13 @@
             </tbody>
         </table>
     </div>
-
-
+    @endif
     <script>
-        document.getElementById('search').addEventListener('input', function() {
-            let filter = this.value.toLowerCase();
-            let rows = document.querySelectorAll('#userTable .user-row');
-            rows.forEach(row => {
-                let text = row.textContent.toLowerCase();
-                row.style.display = text.includes(filter) ? '' : 'none';
-            });
-        });
-
         document.querySelectorAll('.user-row').forEach(row => {
             row.addEventListener('click', function() {
                 window.location.href = this.dataset.url;
             });
         });
+
     </script>
 @endsection

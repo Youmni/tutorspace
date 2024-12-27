@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.courses') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.courses.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
                         <span class="material-icons">school</span>
                         Courses
                     </a>
