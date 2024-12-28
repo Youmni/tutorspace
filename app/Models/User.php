@@ -54,10 +54,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function newsItems()
-    {
-        return $this->hasMany(NewsItem::class, 'user_id');
-    }
 
     public function sentMessages()
     {

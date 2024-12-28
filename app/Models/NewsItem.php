@@ -9,12 +9,9 @@ class NewsItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title', 'content', 'image_path', 'publication_date', 'user_id',
-    ];
+    protected $table = 'newsitems';
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    protected $fillable = [
+        'title', 'content', 'image_path', 'publication_date',
+    ];
 }

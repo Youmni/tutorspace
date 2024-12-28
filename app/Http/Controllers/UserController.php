@@ -8,20 +8,22 @@ use App\Models\User;
 class UserController extends Controller
 {
 
-    public function updateUser(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->role = $request->input('role');
-        $user->save();
-
-        return redirect()->route('admin.user.show', $user->user_id)->with('success', 'User role updated successfully.');
-    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search');
+    
+        $users = User::query()
+            ->where('user_id', 'LIKE', "$search")
+            ->orWhere('first_name', 'LIKE', "%{$search}%")
+            ->orWhere('last_name', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%")
+            ->orWhere('role', 'LIKE', "%{$search}%")
+            ->get();
+    
+        return view('admin.user.users', compact('users'));
     }
 
     /**
@@ -29,7 +31,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.user_create'); 
     }
 
     /**
@@ -47,7 +49,6 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role' => 'required|string|in:client,tutor,admin',
-            'address_id' => 'nullable|exists:addresses,address_id',
         ]);
     
         $user = new User();
@@ -60,18 +61,18 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->role = $request->input('role');
-        $user->address_id = $request->input('address_id');
         $user->save();
     
-        return redirect()->route('admin.users')->with('success', 'User created successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.user.user_show', compact('user'));
     }
 
     /**
@@ -87,7 +88,11 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->role = $request->input('role');
+        $user->save();
+
+        return redirect()->route('admin.users.show', $user->user_id)->with('success', 'User role updated successfully.');
     }
 
     /**

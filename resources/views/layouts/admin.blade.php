@@ -18,13 +18,13 @@
         <nav id="sidebar" class="flex grow mt-4 md:mt-0 md:block hidden">
             <ul class="flex flex-col gap-4 px-4">
                 <li>
-                    <a href="{{ route('admin.home') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.home.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
                         <span class="material-icons">home</span>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.users') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
                         <span class="material-icons">people</span>
                         Users
                     </a>
@@ -36,9 +36,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.reports') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.faq.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
                         <span class="material-icons">bar_chart</span>
-                        Reports
+                        FAQ
                     </a>
                 </li>
             </ul>

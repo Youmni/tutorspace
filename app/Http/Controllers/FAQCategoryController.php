@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Institution; 
+use App\Models\FAQCategory; 
 
-class InstitutionController extends Controller
+class FAQCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,23 +14,20 @@ class InstitutionController extends Controller
     {
         $search = $request->input('search');
 
-        $institutions = Institution::query()
-            ->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('country', 'LIKE', "%{$search}%")
-            ->orWhere('institution_id', 'LIKE', "%{$search}%")
-            ->orWhere('created_at', 'LIKE', "%{$search}%")
-            ->orWhere('updated_at', 'LIKE', "%{$search}%")
+        $categories = FAQCategory::query()
+            ->where('category_id', 'LIKE', "%{$search}%")
+            ->orWhere('name', 'LIKE', "%{$search}%")
             ->get();
 
-        return view('admin.institution.institutions', compact('institutions'));
+        return view('admin.faq.faq', compact('categories'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.institution.institutions_add');
+        return view('admin.faq.faq_category_add');
     }
 
     /**
@@ -38,20 +35,14 @@ class InstitutionController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = $request -> validate([
             'name' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
         ]);
-    
-        Institution::create([
-            'name' => $validatedData['name'],
-            'country' => $validatedData['country'],
-        ]);
-    
-        return redirect()->route('admin.institutions.index')->with('success', 'Institution created successfully.');
-    
+
+        FAQCategory::create($validatedData);
+
+        return redirect()->route('admin.faq.index')->with('success', 'FAQ Category created successfully.');
     }
-    
 
     /**
      * Display the specified resource.

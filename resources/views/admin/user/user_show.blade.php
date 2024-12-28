@@ -51,7 +51,7 @@
     </div>
 
     <div class="bg-white shadow-md rounded p-6">
-        <form action="{{ route('admin.user.updateRole', $user->user_id) }}" method="POST">
+        <form action="{{ route('admin.users.update', $user->user_id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-4">
@@ -74,7 +74,7 @@
             if (successMessage) {
                 setTimeout(() => {
                     successMessage.style.display = 'none';
-                }, 3000); // 3000 milliseconds = 3 seconds
+                }, 3000);
             }
         });
     </script>

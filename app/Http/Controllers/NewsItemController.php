@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Course; 
-use App\Models\Institution; 
+use App\Models\NewsItem; 
 
 
-class CourseController extends Controller
+class NewsItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +14,14 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-    
-        $courses = Course::with('institution')
+
+        $newsItems = NewsItem::query()
             ->where('title', 'LIKE', "%{$search}%")
-            ->orWhere('description', 'LIKE', "%{$search}%")
-            ->orWhereHas('institution', function ($query) use ($search) {
-                $query->where('name', 'LIKE', "%{$search}%");
-            })
+            ->orWhere('content', 'LIKE', "%{$search}%")
+            ->orWhere('item_id', 'LIKE', "%{$search}%")
             ->get();
-            
-        return view('admin.course.courses', compact('courses'));
+
+        return view('admin.announcement.announcement', compact('newsItems'));
     }
 
     /**
@@ -32,8 +29,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $institutions = Institution::all();
-        return view('admin.course.courses_add', compact('institutions'));
+        return view('admin.announcement.announcement_add');
     }
 
     /**
@@ -43,17 +39,18 @@ class CourseController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'institution_id' => 'required|exists:institutions,institution_id',
+            'content' => 'required|string',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
-        Course::create([
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'institution_id' => $validatedData['institution_id'],
-        ]);
-    
-        return redirect()->route('admin.courses.index')->with('success', 'Course created successfully.');
+
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('images', 'public');
+            $validatedData['image_path'] = $imagePath;
+        }
+
+        NewsItem::create($validatedData);
+
+        return redirect()->route('admin.news_items.index')->with('success', 'News item created successfully.');
     }
 
     /**

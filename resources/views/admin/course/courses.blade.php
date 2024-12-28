@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Course Management</h1>
     <div class="flex justify-end gap-5 mb-4">
-        <a href="{{ route('admin.courses.add') }}" class="underline text-black hover:text-blue-700">Add courses</a>
+        <a href="{{ route('admin.courses.create') }}" class="underline text-black hover:text-blue-700">Add courses</a>
         <a href="{{ route('admin.institutions.index') }}" class="underline black hover:text-blue-700">Institution</a>
     </div>
 

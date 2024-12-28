@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="text-2xl font-bold mb-4">Registrate user</h1>
-<form method="POST" action="{{ route('admin.user.store') }}">
+<form method="POST" action="{{ route('admin.users.store') }}">
         @csrf
 
         <!-- Fist Name -->

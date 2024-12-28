@@ -3,10 +3,10 @@
 @section('content')
     <div class="flex justify-between">
         <h1 class="text-2xl font-bold mb-4">User Management</h1>
-        <a href="{{ route('admin.create') }}" class="underline">Create User</a>    
+        <a href="{{ route('admin.users.create') }}" class="underline">Create User</a>    
     </div>
 
-    <form method="get" action="{{ route('admin.users') }}" class="mb-4 flex gap-2">
+    <form method="get" action="{{ route('admin.users.index') }}" class="mb-4 flex gap-2">
         <input type="text" name="search" placeholder="Search users..." value="{{ request('search') }}" class="border rounded py-2 px-4 w-full">
         <button type="submit" class="bg-navy-500 text-white py-2 px-4 rounded hover:bg-blue-700">Search</button>
     </form>
@@ -27,7 +27,7 @@
             </thead>
             <tbody id="userTable">
                 @foreach ($users as $user)
-                    <tr class="user-row cursor-pointer hover:bg-gray-50" data-url="{{ route('admin.user.show', $user->user_id) }}">
+                    <tr class="user-row cursor-pointer hover:bg-gray-50" data-url="{{ route('admin.users.show', $user->user_id) }}">
                         <td class="py-2 px-4 border-b text-start">{{ $user->user_id }}</td>
                         <td class="py-2 px-4 border-b text-start">{{ $user->first_name }}</td>
                         <td class="py-2 px-4 border-b text-start">{{ $user->last_name }}</td>

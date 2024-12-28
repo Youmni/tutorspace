@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Institution Management</h1>
     <div class="flex justify-end gap-5 mb-4">
-        <a href="{{ route('admin.institutions.add') }}" class="underline text-black hover:text-blue-700">Add institution</a>
+        <a href="{{ route('admin.institutions.create') }}" class="underline text-black hover:text-blue-700">Add institution</a>
     </div>
 
     <form method="GET" action="{{ route('admin.institutions.index') }}" class="mb-4 flex gap-2">
