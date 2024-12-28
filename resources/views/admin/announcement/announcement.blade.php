@@ -22,6 +22,7 @@
                         <th class="py-2 px-4 border-b text-left">Title</th>
                         <th class="py-2 px-4 border-b text-left">Content</th>
                         <th class="py-2 px-4 border-b text-left">Publication date</th>
+                        <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,13 @@
                             <td class="border px-4 py-2">{{ $newsItem->title }}</td>
                             <td class="border px-4 py-2">{{ $newsItem->content }}</td>
                             <td class="border px-4 py-2">{{ $newsItem-> publication_date }}</td>
+                            <td class="border px-4 py-2">
+                                <form action="{{ route('admin.news_items.destroy', $newsItem->item_id)}}" method="POST">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

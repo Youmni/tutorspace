@@ -9,6 +9,7 @@ class FAQCategory extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'category_id';
     protected $table = 'faq_categories';
 
 

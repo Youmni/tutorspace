@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Home</h1>
     <div class="flex justify-end mb-4">
-        <a href="{{ route('admin.news_items.index') }}" class="underline text-blue-500 hover:text-blue-700 cursor-pointer">Create Announcement</a>
+        <a href="{{ route('admin.news_items.index') }}" class="underline text-blue-500 hover:text-blue-700 cursor-pointer">Announcements</a>
     </div>
     <div class="grid grid-cols-3 gap-4 mb-8">
         <div class="p-4 bg-blue-100 shadow rounded">

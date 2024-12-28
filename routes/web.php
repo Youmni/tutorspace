@@ -44,12 +44,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/', [CourseController::class, 'index'])->name('index');
         Route::post('/', [CourseController::class, 'store'])->name('store');
         Route::get('/create', [CourseController::class, 'create'])->name('create');
+        Route::delete('/{id}', [CourseController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('institutions')->name('institutions.')->group(function () {
         Route::get('/', [InstitutionController::class, 'index'])->name('index');
         Route::get('/create', [InstitutionController::class, 'create'])->name('create');
         Route::post('/', [InstitutionController::class, 'store'])->name('store');
+        Route::delete('/{id}', [InstitutionController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('faq')->name('faq.')->group(function () {
@@ -59,13 +61,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/category/{id}', [FAQQuestionController::class, 'index'])->name('faq_questions.index');    
         Route::get('/question/create/{category_id}', [FAQQuestionController::class, 'create'])->name('faq_questions.create');
         Route::post('/question', [FAQQuestionController::class, 'store'])->name('faq_questions.store');
-
+        Route::delete('/category/{id}', [FAQCategoryController::class, 'destroy'])->name('faq_category.destroy');
+        Route::delete('/question/{id}', [FAQQuestionController::class, 'destroy'])->name('faq_questions.destroy');
     });
 
     Route::prefix('newsItems')->name('news_items.')->group(function () {
         Route::post('/', [NewsItemController::class, 'store'])->name('store');    
         Route::get('/create', [NewsItemController::class, 'create'])->name('create');    
         Route::get('/', [NewsItemController::class, 'index'])->name('index');
+        Route::delete('/{id}', [NewsItemController::class, 'destroy'])->name('destroy');
     });
 
 

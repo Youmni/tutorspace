@@ -23,6 +23,7 @@
                         <th class="py-2 px-4 border-b text-left">Country</th>
                         <th class="py-2 px-4 border-b text-left">Created</th>
                         <th class="py-2 px-4 border-b text-left">Updated</th>
+                        <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,13 @@
                             <td class="border px-4 py-2">{{ $institution->country }}</td>
                             <td class="border px-4 py-2">{{ $institution->created_at }}</td>
                             <td class="border px-4 py-2">{{ $institution->updated_at }}</td>
+                            <td class="border px-4 py-2">
+                                <form action="{{ route('admin.institutions.destroy', $institution->institution_id)}}" method="POST">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

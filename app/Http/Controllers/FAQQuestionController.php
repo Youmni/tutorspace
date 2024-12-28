@@ -73,6 +73,9 @@ class FAQQuestionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $question = FAQQuestion::findOrFail($id);
+        $question->delete();
+        
+        return redirect()->route('admin.faq.index')->with('success', 'Question deleted successfully.');
     }
 }

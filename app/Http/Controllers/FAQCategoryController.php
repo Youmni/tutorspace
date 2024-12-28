@@ -73,6 +73,9 @@ class FAQCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = FAQCategory::findOrFail($id);
+        $category->delete();
+        
+        return redirect()->route('admin.faq.index')->with('success', 'Category deleted successfully.');
     }
 }

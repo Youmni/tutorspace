@@ -18,25 +18,25 @@
         <nav id="sidebar" class="flex grow mt-4 md:mt-0 md:block hidden">
             <ul class="flex flex-col gap-4 px-4">
                 <li>
-                    <a href="{{ route('admin.home.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.home.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full {{ request()->routeIs('admin.home.index') ? 'bg-white text-black' : '' }}">
                         <span class="material-icons">home</span>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full {{ request()->routeIs('admin.users.index') ? 'bg-white text-black' : '' }}">
                         <span class="material-icons">people</span>
                         Users
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.courses.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.courses.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full {{ request()->routeIs('admin.courses.index') ? 'bg-white text-black' : '' }}">
                         <span class="material-icons">school</span>
                         Courses
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.faq.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full">
+                    <a href="{{ route('admin.faq.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full {{ request()->routeIs('admin.faq.index') ? 'bg-white text-black' : '' }}">
                         <span class="material-icons">bar_chart</span>
                         FAQ
                     </a>

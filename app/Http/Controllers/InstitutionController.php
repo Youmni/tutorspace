@@ -82,6 +82,9 @@ class InstitutionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $institution = Institution::findOrFail($id);
+        $institution->delete();
+        
+        return redirect()->route('admin.institutions.index')->with('success', 'Item deleted successfully.');
     }
 }

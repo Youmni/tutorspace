@@ -22,6 +22,7 @@
                         <th class="py-2 px-4 border-b text-left">Question</th>
                         <th class="py-2 px-4 border-b text-left">Answer</th>
                         <th class="py-2 px-4 border-b text-left">Created</th>
+                        <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,13 @@
                             <td class="border px-4 py-2">{{ $question->question }}</td>
                             <td class="border px-4 py-2">{{ $question->answer }}</td>
                             <td class="border px-4 py-2">{{ $question->created_at }}</td>
+                            <td class="border px-4 py-2">
+                                <form action="{{ route('admin.faq.faq_questions.destroy', $question->question_id)}}" method="POST">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

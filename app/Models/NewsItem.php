@@ -9,6 +9,8 @@ class NewsItem extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'item_id';
+
     protected $table = 'newsitems';
 
     protected $fillable = [

@@ -82,6 +82,9 @@ class NewsItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $item = NewsItem::findOrFail($id);
+        $item->delete();
+        
+        return redirect()->route('admin.news_items.index')->with('success', 'Item deleted successfully.');
     }
 }

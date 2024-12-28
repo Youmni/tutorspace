@@ -21,6 +21,7 @@
                         <th class="py-2 px-4 border-b text-left">ID</th>
                         <th class="py-2 px-4 border-b text-left">Name</th>
                         <th class="py-2 px-4 border-b text-left">Created</th>
+                        <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,13 @@
                             <td class="border px-4 py-2">{{ $category->category_id }}</td>
                             <td class="border px-4 py-2">{{ $category->name }}</td>
                             <td class="border px-4 py-2">{{ $category->created_at }}</td>
+                            <td class="border px-4 py-2">
+                                <form action="{{ route('admin.faq.faq_category.destroy', $category->category_id)}}" method="POST">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
