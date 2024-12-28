@@ -67,6 +67,7 @@
             </button>
         </form>
     </div>
+    <a class="underline hover:text-navy-500" href="{{ route('admin.users.index') }}">Back</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -29,10 +29,11 @@
             <x-input-error :messages="$errors->get('institution_id')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between mt-4">
             <x-primary-button class="ml-4">
                 {{ __('Add Course') }}
             </x-primary-button>
+            <a class="underline hover:text-navy-500" href="{{ route('admin.courses.index') }}">Back</a>
         </div>
     </form>
 @endsection

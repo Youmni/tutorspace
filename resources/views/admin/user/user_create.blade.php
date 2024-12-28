@@ -74,8 +74,11 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <button type="submit" class="mt-4 bg-navy-500 text-white font-bold py-2 px-4 rounded hover:bg-green-500">
-            {{ __('Create') }}
-        </button>
+        <div class="flex justify-between items-center mt-4">
+            <button type="submit" class="bg-navy-500 text-white font-bold py-2 px-4 rounded hover:bg-green-500">
+                {{ __('Create') }}
+            </button>
+            <a class="underline hover:text-navy-500" href="{{ route('admin.users.index') }}">Back</a>
+        </div>
     </form>
 @endsection

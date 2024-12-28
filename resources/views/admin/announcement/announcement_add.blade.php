@@ -24,7 +24,8 @@
         <x-input-error :messages="$errors->get('image_path')" class="mt-2" />
     </div>
 
-    <div class="flex items-center justify-end mt-4">
+    <div class="flex items-center justify-between mt-4">
+        <a class="underline hover:text-navy-500" href="{{ route('admin.news_items.index')}}">Back</a>
         <x-primary-button class="ml-4">
             {{ __('Add Announcement') }}
         </x-primary-button>

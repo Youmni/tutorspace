@@ -37,6 +37,7 @@
                     @endforeach
                 </tbody>
             </table>
+            <a class="underline hover:text-navy-500" href="{{ route('admin.courses.index') }}">Back</a>
         </div>
     @endif
 @endsection
