@@ -28,6 +28,9 @@ Route::get('/dashboard', function () {
 
 Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('/', [UserCourseController::class, 'index'])->name('index');
+    Route::get('/{id}', [UserCourseController::class, 'showTutors'])->name('tutors');
+    Route::post('/{id}', [UserCourseController::class, 'store'])->name('storeTutor');
+    Route::get('/tutor/{id}', [UserCourseController::class, 'create'])->name('createTutor');
 });
 
 

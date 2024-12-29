@@ -8,12 +8,12 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($courses as $course)
-                    <div class="bg-gray-100 border-l-4 border-blue-500 p-6 rounded-lg shadow-md">
+                    <a href="{{ route('courses.tutors', ['id' => $course->course_id]) }}" class="block bg-gray-100 border-l-4 border-blue-500 p-6 rounded-lg shadow-md hover:bg-gray-200 transition">
                         <h2 class="text-xl font-bold mb-2 text-blue-500">{{ $course->title }}</h2>
                         <p class="text-gray-700 mb-4">{{ $course->description }}</p>
                         <p class="text-gray-500">Institution: {{ $course->institution->name }}</p>
                         <p class="text-gray-500">Country: {{ $course->institution->country }}</p>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         @endif

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Course; 
 use App\Models\Institution; 
+use App\Models\TutorCourse; 
+
 
 class UserCourseController extends Controller
 {
@@ -33,20 +36,48 @@ class UserCourseController extends Controller
         return view('user.course.courses', compact('courses', 'institutions', 'countries'));
     }
 
+    public function showTutors($id)
+    {
+        $course = Course::findOrFail($id);
+        $tutors = $course->tutorCourses()->with('tutor')->get();
+        return view('user.course.course_tutor', compact('course', 'tutors'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        return view('user.course.course_tutor_add', compact(('course')));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        $user = Auth::user();
+
+        $existingTutorCourse = TutorCourse::where('user_id', $user->user_id)
+        ->where('course_id', $course->course_id)
+        ->first();
+
+        if ($existingTutorCourse) {
+            return redirect()->route('courses.tutors', $course->course_id)->with('error', 'You are already a tutor for this course.');
+        }
+
+        TutorCourse::create([
+            'user_id' => $user->user_id,
+            'course_id' => $course->course_id,
+        ]);
+
+        $user->role = 'tutor';
+        $user->save();
+
+        return redirect()->route('courses.tutors', $course->course_id)->with('success', 'You have successfully become a tutor for this course.');
     }
 
     /**
