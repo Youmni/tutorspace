@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Institution; 
+use App\Http\Controllers\Controller;
 
 class InstitutionController extends Controller
 {

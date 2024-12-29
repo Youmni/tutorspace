@@ -1,36 +1,62 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    @vite('resources/css/app.css')
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+    <header class="shadow-lg bg-white">
+        <nav class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4">
+            <h1 class="text-2xl font-bold text-gray-900">TutorSpace</h1>
+            <form method="get" action="{{ route('courses.index') }}" class="flex items-center gap-2 mt-4 md:mt-0">
+                <span class="material-icons text-gray-500">search</span>
+                <input 
+                    type="text" 
+                    name="search" 
+                    placeholder="Search courses..." 
+                    value="{{ request('search') }}"
+                    class="border border-gray-300 rounded-full py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </form>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            <ul class="flex gap-6 mt-4 md:mt-0">
+                <li>
+                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('courses.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
+                        Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                        Contact
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                        Profile
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+    <main class="flex-grow p-2 md:p-2 container mx-auto flex flex-col">
+        <div class="bg-white p-6 rounded-lg shadow-md flex-grow">
+            @yield('content')
         </div>
-    </body>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2024 Youmni</p>
+    </footer>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</body>
 </html>

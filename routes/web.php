@@ -1,14 +1,20 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\InstitutionController;
-use App\Http\Controllers\FAQQuestionController;
-use App\Http\Controllers\FAQCategoryController;
-use App\Http\Controllers\NewsItemController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\InstitutionController;
+use App\Http\Controllers\Admin\FAQQuestionController;
+use App\Http\Controllers\Admin\FAQCategoryController;
+use App\Http\Controllers\Admin\NewsItemController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\UserCourseController;
+use App\Http\Controllers\User\ContactController;
+
 
 use App\Http\Middleware\AdminMiddleware;
 
@@ -20,10 +26,29 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::prefix('courses')->name('courses.')->group(function () {
+    Route::get('/', [UserCourseController::class, 'index'])->name('index');
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('home')->name('home.')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('contact')->name('contact.')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('index');
+    });
+
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

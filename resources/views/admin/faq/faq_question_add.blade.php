@@ -20,7 +20,7 @@
 
     <input type="hidden" name="category_id" value="{{ $category_id }}">
 
-    <div class="flex items-center justify-between mt-4">
+    <div class="flex items-center justify-space-between mt-4">
         <x-primary-button class="ml-4">
             {{ __('Add Question') }}
         </x-primary-button>

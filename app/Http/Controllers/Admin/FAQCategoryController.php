@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\FAQCategory; 
+use App\Http\Controllers\Controller;
 
 class FAQCategoryController extends Controller
 {

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1 class="text-2xl font-bold mb-4">FAQ Management</h1>
+<h1 class="text-2xl font-bold mb-4">FAQ Management: categories</h1>
     <div class="flex justify-end gap-5 mb-4">
         <a href="{{ route('admin.faq.faq_category.create') }}" class="underline text-black hover:text-blue-700">Add category</a>
     </div>
