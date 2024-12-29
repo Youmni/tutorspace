@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\NewsItem; 
+use Illuminate\Http\Request;
 
-
-class HomeController extends Controller
+class FAQController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $newsItems = NewsItem::latest()->take(3)->get();
-        return view('user/home/home', compact('newsItems'));
+        //
     }
 
     /**

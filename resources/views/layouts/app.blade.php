@@ -24,7 +24,7 @@
 
             <ul class="flex gap-6 mt-4 md:mt-0">
                 <li>
-                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                    <a href="{{ route('home.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Home
                     </a>
                 </li>
@@ -36,6 +36,11 @@
                 <li>
                     <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Contact
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                        FAQ
                     </a>
                 </li>
                 <li>
