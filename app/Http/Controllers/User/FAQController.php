@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\FAQCategory; 
+use App\Models\FAQQuestion; 
+
 
 class FAQController extends Controller
 {
@@ -12,7 +15,8 @@ class FAQController extends Controller
      */
     public function index()
     {
-        //
+        $categories = FAQCategory::all();
+        return view('admin.faq.faq', compact('categories'));    
     }
 
     /**
@@ -34,9 +38,10 @@ class FAQController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $questions = FAQQuestion::all();
+        return view('admin.faq.faq_questions', compact('questions', 'id'));
     }
 
     /**

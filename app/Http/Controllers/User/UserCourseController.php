@@ -107,8 +107,30 @@ class UserCourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($course_id)
     {
-        //
+        $user_id = Auth::id();
+
+        \Log::info('Destroy method called');
+        \Log::info('User ID: ' . $user_id);
+        \Log::info('Course ID: ' . $course_id);
+
+        $tutorCourse = TutorCourse::where('user_id', $user_id)
+            ->where('course_id', $course_id)
+            ->firstOrFail();
+
+        \Log::info('TutorCourse object: ', $tutorCourse->toArray());
+
+        $tutorCourse->delete();
+
+        $remainingTutorCourses = TutorCourse::where('user_id', $user_id)->count();
+
+        if ($remainingTutorCourses === 0) {
+            $user = Auth::user();
+            $user->role = 'client';
+            $user->save();
+        }
+
+        return redirect()->route('profile.courses')->with('status', 'Course deleted successfully.');
     }
 }

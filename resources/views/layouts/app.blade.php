@@ -22,7 +22,7 @@
                 />
             </form>
 
-            <ul class="flex gap-6 mt-4 md:mt-0">
+            <ul class="flex items-center gap-6">
                 <li>
                     <a href="{{ route('home.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Home
@@ -43,11 +43,37 @@
                         FAQ
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
-                        Profile
-                    </a>
-                </li>
+                @if (Route::has('login'))
+                    @auth
+                        <li>
+                            <a
+                                href="{{ route('profile.index') }}"
+                                class="rounded-md px-3 py-2 text-gray-700 transition hover:text-blue-500"
+                            >
+                                profile
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a
+                                href="{{ route('login') }}"
+                                class="rounded-md px-3 py-2 bg-blue-500 text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                Log in
+                            </a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li>
+                                <a
+                                    href="{{ route('register') }}"
+                                    class="rounded-md px-3 py-2 bg-blue-500 text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    Register
+                                </a>
+                            </li>
+                        @endif
+                    @endauth
+                @endif
             </ul>
         </nav>
     </header>

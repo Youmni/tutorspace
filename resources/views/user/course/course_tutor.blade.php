@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container mx-auto p-6">
-    <a href="{{ route('courses.createTutor', ['id' => $course->course_id])}}" class="underline float-right hover:text-blue-500 cursor-pointer">Become tutor for {{$course->title}}</a>
+    <a href="{{ Auth::check() ? route('courses.createTutor', ['id' => $course->course_id]) : route('login') }}" class="underline float-right hover:text-blue-500 cursor-pointer">
+        Become tutor for {{ $course->title }}
+    </a>    
     <h1 class="text-3xl font-extrabold text-center text-indigo-600 mb-8">Tutors for {{ $course->title }}</h1>
     
     @if($tutors->isEmpty())

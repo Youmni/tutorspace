@@ -46,7 +46,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'date_of_birth' => 'nullable|date',
             'profile_photo' => 'nullable|string|max:255',
-            'about_me' => 'nullable|string',
+            'about_me' => 'nullable|string|max:128',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role' => 'required|string|in:client,tutor,admin',

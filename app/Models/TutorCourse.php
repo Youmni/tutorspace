@@ -9,10 +9,11 @@ class TutorCourse extends Model
 {
     use HasFactory;
 
-    protected $table = 'tutorcourses';
+    protected $table = 'tutor_courses';
 
+    public $incrementing = true;
 
-    public $timestamps = false; 
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id', 'course_id',

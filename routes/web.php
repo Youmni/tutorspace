@@ -14,12 +14,14 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserCourseController;
 use App\Http\Controllers\User\ContactController;
+use App\Http\Controllers\Auth\PasswordController;
+
 
 
 use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.home.home');
 });
 
 Route::get('/dashboard', function () {
@@ -34,19 +36,27 @@ Route::prefix('courses')->name('courses.')->group(function () {
 });
 
 
+Route::prefix('home')->name('home.')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+});
+
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::put('/', [ProfileController::class, 'updateProfile'])->name('update.profile');
+        Route::get('/course', [ProfileController::class, 'courses'])->name('courses');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::get('/security', [ProfileController::class, 'edit'])->name('security');
+
     });
 
-    Route::prefix('home')->name('home.')->group(function () {
-        Route::get('/', [HomeController::class, 'index'])->name('index');
-    });
+    Route::get('/password', [PasswordController::class, 'update'])->name('password.update');
+
+
+    Route::delete('/{id}', [UserCourseController::class, 'destroy'])->name('tutor_course.destroy');
+
 
     Route::prefix('contact')->name('contact.')->group(function () {
         Route::get('/', [ContactController::class, 'index'])->name('index');
