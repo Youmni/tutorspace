@@ -16,7 +16,7 @@ class FAQController extends Controller
     public function index()
     {
         $categories = FAQCategory::all();
-        return view('admin.faq.faq', compact('categories'));    
+        return view('user.faq.faq', compact('categories'));    
     }
 
     /**
@@ -40,8 +40,8 @@ class FAQController extends Controller
      */
     public function show($id)
     {
-        $questions = FAQQuestion::all();
-        return view('admin.faq.faq_questions', compact('questions', 'id'));
+        $questions = FAQQuestion::where('category_id', $id)->get();
+        return view('user.faq.faq_questions', compact('questions', 'id'));
     }
 
     /**

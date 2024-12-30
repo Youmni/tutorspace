@@ -14,6 +14,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserCourseController;
 use App\Http\Controllers\User\ContactController;
+use App\Http\Controllers\User\FAQController;
 use App\Http\Controllers\Auth\PasswordController;
 
 
@@ -21,7 +22,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
-    return view('user.home.home');
+    return redirect()->route('home.index');
 });
 
 Route::get('/dashboard', function () {
@@ -38,6 +39,11 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
+});
+
+Route::prefix('faq')->name('faq.')->group(function () {
+    Route::get('/catagories', [FAQController::class, 'index'])->name('index');
+    Route::get('/questions/{id}', [FAQController::class, 'show'])->name('show');
 });
 
 

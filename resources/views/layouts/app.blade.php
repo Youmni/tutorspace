@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                    <a href="{{ route('faq.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         FAQ
                     </a>
                 </li>
