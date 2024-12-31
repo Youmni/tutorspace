@@ -39,8 +39,8 @@ class NewsItemController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:5|max:50',
+            'content' => 'required|string|min:10|max:255',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -77,8 +77,8 @@ class NewsItemController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:5|max:50',
+            'content' => 'required|string|min:10|max:255',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

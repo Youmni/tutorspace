@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('newsItems', function (Blueprint $table) {
             $table->id('item_id');
-            $table->string('title');
-            $table->text('content');
+            $table->string('title',50)->nullable(false);
+            $table->text('content',255)->nullable(false);
             $table->string('image_path')->nullable();
             $table->timestamp('publication_date')->useCurrent();
             $table->timestamps();

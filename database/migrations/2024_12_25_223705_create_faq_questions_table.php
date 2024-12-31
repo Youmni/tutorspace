@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('faq_questions', function (Blueprint $table) {
             $table->id('question_id');
-            $table->text('question');
-            $table->text('answer');
-            $table->unsignedBigInteger('category_id');
+            $table->text('question', 255)->nullable(false);
+            $table->text('answer', 255)->nullable(false);
+            $table->unsignedBigInteger('category_id')->nullable(false);
             $table->foreign('category_id')->references('category_id')->on('faq_categories')->onDelete('cascade');
             $table->timestamps();
         });

@@ -40,8 +40,8 @@ class InstitutionController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'name' => 'required|string|min:2|max:100',
+            'country' => 'required|string|min:3|max:150',
         ]);
     
         Institution::create([
@@ -77,8 +77,8 @@ class InstitutionController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'name' => 'required|string|min:2|max:100',
+            'country' => 'required|string|min:3|max:150',
         ]);
 
         $institution = Institution::findOrFail($id);

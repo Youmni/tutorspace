@@ -39,8 +39,8 @@ class FAQQuestionController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'question' => 'required|string|max:255',
-            'answer' => 'required|string',
+            'question' => 'required|string|min:10|max:255',
+            'answer' => 'required|string|min:2|max:255',
             'category_id' => 'required|exists:faq_categories,category_id',
         ]);
 
@@ -73,8 +73,8 @@ class FAQQuestionController extends Controller
     public function update(Request $request, $category_id, $question_id)
     {
         $validatedData = $request->validate([
-            'question' => 'required|string|max:255',
-            'answer' => 'required|string|max:255',
+            'question' => 'required|string|min:10|max:255',
+            'answer' => 'required|string|min:2|max:255',
         ]);
 
         $question = FAQQuestion::findOrFail($question_id);

@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if(session('success'))
+        <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="flex justify-between">
         <h1 class="text-2xl font-bold mb-4">User Management</h1>
         <a href="{{ route('admin.users.create') }}" class="underline">Create User</a>    

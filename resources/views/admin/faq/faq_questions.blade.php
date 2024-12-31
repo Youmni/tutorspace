@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if(session('success'))
+        <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
     <h1 class="text-2xl font-bold mb-4">Questions</h1>
     <div class="flex justify-end gap-5 mb-4">
         <a href="{{ route('admin.faq.faq_questions.create', ['category_id' => $id]) }}" class="underline text-black hover:text-blue-700">Add question</a>

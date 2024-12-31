@@ -43,8 +43,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'required|string|min:2|max:100',
+            'description' => 'required|string|min:20|max:255',
             'institution_id' => 'required|exists:institutions,institution_id',
         ]);
     
@@ -81,8 +81,8 @@ class CourseController extends Controller
     public function update(Request $request,$id)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'required|string|min:2|max:100',
+            'description' => 'required|string|min:20|max:255',
             'institution_id' => 'required|exists:institutions,institution_id',
         ]);
 

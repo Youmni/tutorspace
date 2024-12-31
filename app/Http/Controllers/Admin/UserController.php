@@ -44,9 +44,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
+            'first_name' => 'required|string|min:2|max:50',
+            'last_name' => 'required|string|min:2|max:60',
+            'username' => 'required|string|min:5|max:15|unique:users',
             'date_of_birth' => 'nullable|date',
             'profile_photo' => 'nullable|string|max:255',
             'about_me' => 'nullable|string|max:128',

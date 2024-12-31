@@ -68,9 +68,9 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->user_id . ',user_id'],
+            'first_name' => ['required', 'string', 'min:2', 'max:50'],
+            'last_name' => ['required', 'string', 'min:2', 'max:60'],
+            'username' => ['required', 'string', 'min:5', 'max:15', 'unique:users,username,' . $user->user_id . ',user_id'],
             'about_me' => ['nullable', 'string', 'max:128'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->user_id . ',user_id'],
             'profile_photo' => ['nullable', 'image', 'max:2048'],
