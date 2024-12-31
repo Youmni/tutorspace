@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
-    <header class="shadow-lg bg-white border border-black">
+    <header class="shadow-lg bg-white border">
         <nav class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4">
             <h1 class="text-2xl font-bold text-gray-900">TutorSpace</h1>
             <form method="get" action="{{ route('courses.index') }}" class="flex items-center gap-2 mt-4 md:mt-0">
@@ -54,7 +54,7 @@
     </header>
     <hr>
     <div class="flex flex-col md:flex-row flex-grow">
-        <nav id="sidebar" class="bg-white text-black border border-r-black w-full md:w-64 shadow-lg p-4">
+        <nav id="sidebar" class="bg-white text-black border-r w-full md:w-64 shadow-lg p-4">
             <ul class="flex flex-col gap-4">
                 <li>
                     <a href="{{ route('profile.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-white hover:bg-black transition-colors text-lg w-full {{ request()->routeIs('admin.home.index') ? 'bg-white text-black' : '' }}">

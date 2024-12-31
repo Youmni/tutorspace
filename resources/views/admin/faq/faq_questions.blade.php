@@ -22,6 +22,7 @@
                         <th class="py-2 px-4 border-b text-left">Question</th>
                         <th class="py-2 px-4 border-b text-left">Answer</th>
                         <th class="py-2 px-4 border-b text-left">Created</th>
+                        <th class="py-2 px-4 border-b text-left">Edit</th>
                         <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
@@ -32,6 +33,8 @@
                             <td class="border px-4 py-2">{{ $question->question }}</td>
                             <td class="border px-4 py-2">{{ $question->answer }}</td>
                             <td class="border px-4 py-2">{{ $question->created_at }}</td>
+                            <td class="border px-4 py-2"><a class="text-blue-500 hover:text-blue-700" href="{{route('admin.faq.faq_question.edit', ['id'=> $question-> question_id])}}">Edit</a></td>
+                    
                             <td class="border px-4 py-2">
                                 <form action="{{ route('admin.faq.faq_questions.destroy', $question->question_id)}}" method="POST">
                                     @csrf 

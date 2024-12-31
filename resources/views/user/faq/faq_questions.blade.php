@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container mx-auto p-6">
+    <a href="{{route('faq.index')}}" class="underline hover:text-blue-500 float-left">Back</a>
     <h1 class="text-3xl font-extrabold text-center text-indigo-600 mb-8">FAQ Questions</h1>
     
     @if($questions->isEmpty())

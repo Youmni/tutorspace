@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\FAQQuestion; 
+use App\Models\FAQCategory; 
 use App\Http\Controllers\Controller;
 
 class FAQQuestionController extends Controller
@@ -16,9 +17,12 @@ class FAQQuestionController extends Controller
         $search = $request->input('search');
 
         $questions = FAQQuestion::query()
-            ->where('question_id', 'LIKE', "%{$search}%")
-            ->orWhere('question', 'LIKE', "%{$search}%")
-            ->orWhere('answer', 'LIKE', "%{$search}%")
+            ->where('category_id', $id)
+            ->where(function ($query) use ($search) {
+                $query->where('question_id', 'LIKE', "%{$search}%")
+                    ->orWhere('question', 'LIKE', "%{$search}%")
+                    ->orWhere('answer', 'LIKE', "%{$search}%");
+            })
             ->get();
 
         return view('admin.faq.faq_questions', compact('questions', 'id'));
@@ -56,17 +60,27 @@ class FAQQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $question = FAQQuestion::findOrFail($id);
+        $category = FAQCategory::findOrFail($question->category_id);
+        return view('admin.faq.faq_question_edit', compact('question', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $category_id, $question_id)
     {
-        //
+        $validatedData = $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string|max:255',
+        ]);
+
+        $question = FAQQuestion::findOrFail($question_id);
+        $question->update($validatedData);
+
+        return redirect()->route('admin.faq.faq_questions.index',['id'=>$category_id])->with('success', 'FAQ question updated successfully.');
     }
 
     /**

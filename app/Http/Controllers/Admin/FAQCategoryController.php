@@ -56,17 +56,25 @@ class FAQCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $category = FAQCategory::findOrFail($id);
+        return view('admin.faq.faq_category_edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category = FAQCategory::findOrFail($id);
+        $category->update($validatedData);
+
+        return redirect()->route('admin.faq.index')->with('success', 'FAQ Category updated successfully.');
     }
 
     /**

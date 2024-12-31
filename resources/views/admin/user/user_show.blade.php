@@ -67,6 +67,35 @@
             </button>
         </form>
     </div>
+    @if($user->role !== 'client')
+        <div class="bg-white shadow-md rounded p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4">Courses Tutored</h2>
+            @if($courses->isEmpty())
+                <p class="text-gray-500">No courses available.</p>
+            @else
+                <table class="min-w-full bg-white border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="py-2 px-4 border-b text-left">Course Title</th>
+                            <th class="py-2 px-4 border-b text-left">Description</th>
+                            <th class="py-2 px-4 border-b text-left">Institution</th>
+                            <th class="py-2 px-4 border-b text-left">Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($courses as $course)
+                            <tr>
+                                <td class="border px-4 py-2">{{ $course->title }}</td>
+                                <td class="border px-4 py-2">{{ $course->description }}</td>
+                                <td class="border px-4 py-2">{{ $course->institution->name }}</td>
+                                <td class="border px-4 py-2">{{ $course->institution->country }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
+    @endif
     <a class="underline hover:text-navy-500" href="{{ route('admin.users.index') }}">Back</a>
 
     <script>

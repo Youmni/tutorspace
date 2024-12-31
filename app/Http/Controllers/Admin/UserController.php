@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Course;
+use App\Models\TutorCourse;
+use App\Models\Institution;
 
 class UserController extends Controller
 {
@@ -73,9 +76,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.user.user_show', compact('user'));
-    }
+        $courses = Course::whereHas('tutorCourses', function ($query) use ($user) {
+            $query->where('user_id', $user->user_id);
+        })->with('institution')->get();
 
+        return view('admin.user.user_show', compact('user', 'courses'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

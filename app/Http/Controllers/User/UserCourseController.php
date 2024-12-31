@@ -74,8 +74,10 @@ class UserCourseController extends Controller
             'course_id' => $course->course_id,
         ]);
 
-        $user->role = 'tutor';
-        $user->save();
+        if($user->role != 'admin'){
+            $user->role = 'tutor';
+            $user->save();
+        }
 
         return redirect()->route('courses.tutors', $course->course_id)->with('success', 'You have successfully become a tutor for this course.');
     }

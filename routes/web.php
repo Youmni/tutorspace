@@ -39,6 +39,7 @@ Route::prefix('courses')->name('courses.')->group(function () {
 
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/announcements', [HomeController::class, 'show'])->name('show');
 });
 
 Route::prefix('faq')->name('faq.')->group(function () {
@@ -102,11 +103,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/', [FAQCategoryController::class, 'index'])->name('index');
         Route::post('/', [FAQCategoryController::class, 'store'])->name('faq_category.store');
         Route::get('/category/create', [FAQCategoryController::class, 'create'])->name('faq_category.create');
-        Route::get('/category/{id}', [FAQQuestionController::class, 'index'])->name('faq_questions.index');    
+        Route::get('/question/{id}', [FAQQuestionController::class, 'index'])->name('faq_questions.index');    
         Route::get('/question/create/{category_id}', [FAQQuestionController::class, 'create'])->name('faq_questions.create');
         Route::post('/question', [FAQQuestionController::class, 'store'])->name('faq_questions.store');
         Route::delete('/category/{id}', [FAQCategoryController::class, 'destroy'])->name('faq_category.destroy');
         Route::delete('/question/{id}', [FAQQuestionController::class, 'destroy'])->name('faq_questions.destroy');
+        Route::put('/category/update/{id}', [FAQCategoryController::class, 'update'])->name('faq_category.update');
+        Route::get('/category/update/{id}', [FAQCategoryController::class, 'edit'])->name('faq_category.edit');    
+        Route::put('/question/update/{category_id}/{question_id}', [FAQQuestionController::class, 'update'])->name('faq_question.update');
+        Route::get('/question/update/{id}', [FAQQuestionController::class, 'edit'])->name('faq_question.edit');    
     });
 
     Route::prefix('newsItems')->name('news_items.')->group(function () {
