@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('contact')->name('contact.')->group(function () {
         Route::get('/', [ContactController::class, 'index'])->name('index');
+        Route::post('/', [ContactController::class, 'send'])->name('send');
     });
 
 });

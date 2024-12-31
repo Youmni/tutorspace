@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                    <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Contact
                     </a>
                 </li>

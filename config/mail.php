@@ -109,8 +109,11 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'uitleendienst.ehb.kaai@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'TutorSpace'),
     ],
+
+    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'youmni.malha@student.ehb.be'),
+
 
 ];
