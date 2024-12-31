@@ -12,8 +12,12 @@
     @else
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($tutors as $tutor)
-                <figure class="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl hover:border-indigo-500 border-2 border-transparent p-6 group">
-                    <img src="{{ file_exists(public_path('storage/app/public/images' . $tutor->tutor->image_path)) ? asset('storage/' . $tutor->tutor->image_path) : asset('storage/images/default.jpg') }}" alt="{{ $tutor->tutor->first_name }} {{ $tutor->tutor->last_name }}" class="w-full h-48 object-cover rounded-lg mb-6">
+                <figure class="bg-white border-2 border shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl hover:border-indigo-500 p-6 group flex flex-col items-center">
+                    <img 
+                        src="{{ $tutor->tutor->profile_photo ? asset('storage/' . $tutor->tutor->profile_photo) : asset('storage/images/default.jpg') }}" 
+                        alt="{{ $tutor->tutor->first_name }} {{ $tutor->tutor->last_name }}" 
+                        class="w-32 h-32 rounded-full border-4 border-indigo-500 shadow-lg transition-transform transform hover:scale-105"
+                    />                    
                     <figcaption class="text-center">
                         <h2 class="text-2xl font-semibold text-gray-800 mb-2">{{ $tutor->tutor->first_name }} {{ $tutor->tutor->last_name }}</h2>
                         
