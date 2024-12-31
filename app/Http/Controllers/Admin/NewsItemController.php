@@ -65,9 +65,10 @@ class NewsItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $announcement = NewsItem::findOrFail($id);
+        return view('admin.announcement.announcement_edit', compact('announcement'));
     }
 
     /**
@@ -75,7 +76,22 @@ class NewsItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $newsItem = NewsItem::findOrFail($id);
+
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('images', 'public');
+            $validatedData['image_path'] = $imagePath;
+        }
+
+        $newsItem->update($validatedData);
+
+        return redirect()->route('admin.news_items.index')->with('success', 'Announcement updated successfully.');
     }
 
     /**

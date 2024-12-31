@@ -22,6 +22,8 @@
                         <th class="py-2 px-4 border-b text-left">Title</th>
                         <th class="py-2 px-4 border-b text-left">Content</th>
                         <th class="py-2 px-4 border-b text-left">Publication date</th>
+                        <th class="py-2 px-4 border-b text-left">Image</th>
+                        <th class="py-2 px-4 border-b text-left">Update</th>
                         <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
@@ -32,6 +34,14 @@
                             <td class="border px-4 py-2">{{ $newsItem->title }}</td>
                             <td class="border px-4 py-2">{{ $newsItem->content }}</td>
                             <td class="border px-4 py-2">{{ $newsItem-> publication_date }}</td>
+                            <td class="border px-4 py-2">
+                                @if ($newsItem->image_path)
+                                    <a href="{{ asset('storage/' . $newsItem->image_path) }}" target="_blank" class="text-blue-500 hover:text-blue-800">View Image</a>
+                                @else
+                                    No Image
+                                @endif
+                            </td>
+                            <td class="border px-4 py-2"><a class="text-blue-500 hover:text-blue-800" href="{{ route('admin.news_items.edit', ['id'=>$newsItem->item_id])}}">Update</a></td>
                             <td class="border px-4 py-2">
                                 <form action="{{ route('admin.news_items.destroy', $newsItem->item_id)}}" method="POST">
                                     @csrf 

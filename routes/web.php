@@ -90,6 +90,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::post('/', [CourseController::class, 'store'])->name('store');
         Route::get('/create', [CourseController::class, 'create'])->name('create');
         Route::delete('/{id}', [CourseController::class, 'destroy'])->name('destroy');
+        Route::put('/{id}', [CourseController::class, 'update'])->name('update');
+        Route::get('/{id}', [CourseController::class, 'edit'])->name('edit');
     });
 
     Route::prefix('institutions')->name('institutions.')->group(function () {
@@ -97,6 +99,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/create', [InstitutionController::class, 'create'])->name('create');
         Route::post('/', [InstitutionController::class, 'store'])->name('store');
         Route::delete('/{id}', [InstitutionController::class, 'destroy'])->name('destroy');
+        Route::put('/{id}', [InstitutionController::class, 'update'])->name('update');
+        Route::get('/{id}', [InstitutionController::class, 'edit'])->name('edit');
     });
 
     Route::prefix('faq')->name('faq.')->group(function () {
@@ -119,6 +123,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/create', [NewsItemController::class, 'create'])->name('create');    
         Route::get('/', [NewsItemController::class, 'index'])->name('index');
         Route::delete('/{id}', [NewsItemController::class, 'destroy'])->name('destroy');
+        Route::put('/{id}', [NewsItemController::class, 'update'])->name('update');
+        Route::get('/{id}', [NewsItemController::class, 'edit'])->name('edit');
     });
 
 

@@ -68,17 +68,28 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $institutions = Institution::all();
+        $course = Course::findOrFail($id);
+        return view('admin.course.courses_edit', compact('course', 'institutions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'institution_id' => 'required|exists:institutions,institution_id',
+        ]);
+
+        $course = Course::findOrFail($id);
+        $course->update($validatedData);
+
+        return redirect()->route('admin.courses.index')->with('success', 'Course updated successfully.');
     }
 
     /**

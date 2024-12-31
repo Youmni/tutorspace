@@ -21,7 +21,7 @@
                         <th class="py-2 px-4 border-b text-left">ID</th>
                         <th class="py-2 px-4 border-b text-left">Name</th>
                         <th class="py-2 px-4 border-b text-left">Created</th>
-                        <th class="py-2 px-4 border-b text-left">Edit</th>
+                        <th class="py-2 px-4 border-b text-left">Update</th>
                         <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
@@ -31,7 +31,7 @@
                             <td class="border px-4 py-2">{{ $category->category_id }}</td>
                             <td class="border px-4 py-2">{{ $category->name }}</td>
                             <td class="border px-4 py-2">{{ $category->created_at }}</td>
-                            <td class="border px-4 py-2"><a href="{{ route('admin.faq.faq_category.edit', ['id' => $category->category_id]) }}" class="text-blue-500 hover:text-blue-700">Edit</a></td>
+                            <td class="border px-4 py-2"><a href="{{ route('admin.faq.faq_category.edit', ['id' => $category->category_id]) }}" class="text-blue-500 hover:text-blue-700">Update</a></td>
                             <td class="border px-4 py-2">
                                 <form action="{{ route('admin.faq.faq_category.destroy', $category->category_id)}}" method="POST">
                                     @csrf 

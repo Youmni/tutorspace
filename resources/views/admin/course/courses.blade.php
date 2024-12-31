@@ -23,6 +23,7 @@
                         <th class="py-2 px-4 border-b text-left">Title</th>
                         <th class="py-2 px-4 border-b text-left">Description</th>
                         <th class="py-2 px-4 border-b text-left">Institution</th>
+                        <th class="py-2 px-4 border-b text-left">Update</th>
                         <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                             <td class="border px-4 py-2">{{ $course->title }}</td>
                             <td class="border px-4 py-2">{{ $course->description }}</td>
                             <td class="border px-4 py-2">{{ $course->institution->name }}</td>
+                            <td class="border px-4 py-2"><a class="text-blue-500 hover:text-blue-800" href="{{ route('admin.courses.edit', $course->course_id)}}">Update</a></td>
                             <td class="border px-4 py-2">
                                 <form action="{{ route('admin.courses.destroy', $course->course_id)}}" method="POST">
                                     @csrf 

@@ -65,9 +65,10 @@ class InstitutionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $institution = Institution::findOrFail($id);
+        return view('admin.institution.institutions_edit',compact('institution'));
     }
 
     /**
@@ -75,7 +76,15 @@ class InstitutionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+        ]);
+
+        $institution = Institution::findOrFail($id);
+        $institution->update($validatedData);
+
+        return redirect()->route('admin.institutions.index')->with('success', 'Institution updated successfully.');
     }
 
     /**

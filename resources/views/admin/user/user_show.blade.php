@@ -40,7 +40,7 @@
         @if ($user->profile_photo)
             <div class="mb-4">
                 <strong>Profile Photo:</strong>
-                <img src="{{ $user->profile_photo }}" alt="Profile Photo" class="rounded-full w-24 h-24">
+                <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Profile Photo" class="rounded-full w-24 h-24">
             </div>
         @endif
         @if ($user->about_me)

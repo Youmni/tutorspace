@@ -33,7 +33,7 @@
                             <td class="border px-4 py-2">{{ $institution->name }}</td>
                             <td class="border px-4 py-2">{{ $institution->country }}</td>
                             <td class="border px-4 py-2">{{ $institution->created_at }}</td>
-                            <td class="border px-4 py-2">{{ $institution->updated_at }}</td>
+                            <td class="border px-4 py-2"><a class="text-blue-500 hover:text-blue-800" href="{{route('admin.institutions.edit', $institution->institution_id)}}">Update</a></td>
                             <td class="border px-4 py-2">
                                 <form action="{{ route('admin.institutions.destroy', $institution->institution_id)}}" method="POST">
                                     @csrf 

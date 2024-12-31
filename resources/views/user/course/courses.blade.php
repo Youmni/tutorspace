@@ -1,8 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex flex-col md:flex-row">
-    <main class="w-full md:w-3/4">
+<div class="flex flex-col p-4">
+    <form method="GET" action="{{ route('courses.index') }}" class="space-y-4 md:space-y-0 md:flex md:gap-4 mb-4">
+        <div class="flex-1">
+            <label for="search" class="block text-sm font-medium text-gray-700">Course name or institution</label>
+            <input type="text" name="search" id="search" value="{{ request('search') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        </div>
+        <div class="flex items-end">
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600">Filter</button>
+        </div>
+    </form>
+
+    <main class="w-full">
         @if($courses->isEmpty())
             <p class="text-gray-500">No courses available.</p>
         @else
