@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('faq_categories', function (Blueprint $table) {
             $table->id('category_id');
-            $table->string('name', 80)-nullable(false);
+            $table->string('name', 80)->nullable(false);
             $table->timestamps();
         });
     }

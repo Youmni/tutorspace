@@ -20,6 +20,7 @@ class NewsItemController extends Controller
             ->where('title', 'LIKE', "%{$search}%")
             ->orWhere('content', 'LIKE', "%{$search}%")
             ->orWhere('item_id', 'LIKE', "%{$search}%")
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('admin.announcement.announcement', compact('newsItems'));

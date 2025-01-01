@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class NewsItem extends Model
 {
     use HasFactory;
+    protected $table = 'news_items';
 
     protected $primaryKey = 'item_id';
-
-    protected $table = 'newsitems';
 
     protected $fillable = [
         'title', 'content', 'image_path', 'publication_date',

@@ -39,7 +39,7 @@ class HomeController extends Controller
      */
     public function show()
     {
-        $newsItems = NewsItem::all();
+        $newsItems = NewsItem::all()->reverse();
         return view('user.home.announcements', compact('newsItems'));
     }
 
