@@ -10,7 +10,7 @@
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
     <header class="shadow-lg bg-white">
         <nav class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4">
-            <h1 class="text-2xl font-bold text-gray-900">TutorSpace</h1>
+            <a href="{{ route('home.index') }}" class="text-2xl font-bold text-gray-900">TutorSpace</a>
             <form method="get" action="{{ route('courses.index') }}" class="flex items-center gap-2 mt-4 md:mt-0">
                 <span class="material-icons text-gray-500">search</span>
                 <input 
