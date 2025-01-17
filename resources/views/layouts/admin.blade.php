@@ -16,7 +16,7 @@
                 <span class="material-icons">menu</span>
             </button>
         </div>
-        <nav id="sidebar" class="flex-grow mt-4 md:mt-0 md:block hidden">
+        <nav id="sidebar" class="flex flex-col flex-grow">
             <ul class="flex flex-col gap-4 px-4">
                 <li>
                     <a href="{{ route('admin.home.index') }}" class="flex items-center gap-4 p-4 rounded-md hover:text-black hover:bg-white transition-colors text-lg w-full {{ request()->routeIs('admin.home.index') ? 'bg-white text-black' : '' }}">
@@ -43,6 +43,15 @@
                     </a>
                 </li>
             </ul>
+            <div class="mt-auto">
+                <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="flex items-center gap-4 p-4 hover:text-white hover:bg-red-600 transition-colors text-lg w-full">
+                        <span class="material-icons">logout</span>
+                        Logout
+                    </button>
+                </form>
+            </div>
         </nav>
     </div>
 

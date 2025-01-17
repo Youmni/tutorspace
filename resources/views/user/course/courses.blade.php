@@ -2,9 +2,10 @@
 
 @section('content')
 <div class="flex flex-col p-4">
+<h1 class="text-4xl font-bold text-center text-indigo-600 mb-6">Courses</h1>
     <form method="GET" action="{{ route('courses.index') }}" class="space-y-4 md:space-y-0 md:flex md:gap-4 mb-4">
         <div class="flex-1">
-            <label for="search" class="block text-sm font-medium text-gray-700">Course name or institution</label>
+            <label for="search" class="block text-sm font-medium text-gray-700">Search by course name or institution</label>
             <input type="text" name="search" id="search" value="{{ request('search') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
         </div>
         <div class="flex items-end">

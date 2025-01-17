@@ -50,8 +50,16 @@
                                 href="{{ route('profile.index') }}"
                                 class="rounded-md px-3 py-2 text-gray-700 transition hover:text-blue-500"
                             >
-                                profile
+                                Profile
                             </a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" class="w-full">
+                                @csrf
+                                <button type="submit" class="rounded-md text-red-600 hover:text-red-800 transition-colors">
+                                    | Logout
+                                </button>
+                            </form>
                         </li>
                     @else
                         <li>

@@ -47,6 +47,12 @@ Route::prefix('faq')->name('faq.')->group(function () {
     Route::get('/questions/{id}', [FAQController::class, 'show'])->name('show');
 });
 
+Route::prefix('contact')->name('contact.')->group(function () {
+    Route::get('/', [ContactController::class, 'index'])->name('index');
+    Route::post('/', [ContactController::class, 'send'])->name('send');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
@@ -63,13 +69,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::delete('/{id}', [UserCourseController::class, 'destroy'])->name('tutor_course.destroy');
-
-
-    Route::prefix('contact')->name('contact.')->group(function () {
-        Route::get('/', [ContactController::class, 'index'])->name('index');
-        Route::post('/', [ContactController::class, 'send'])->name('send');
-    });
-
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

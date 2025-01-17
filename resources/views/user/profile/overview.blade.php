@@ -19,7 +19,7 @@
             <input type="file" name="profile_photo" id="profile_photo" class="block w-full px-3 py-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
             @if ($user->profile_photo)
                 <div class="mt-4">
-                    <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Profile Picture" class="w-32 h-32 rounded-full border border-gray-300 shadow-sm">
+                <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : asset('storage/images/default.jpg') }}" alt="Profile Picture" class="w-32 h-32 rounded-full border border-gray-300 shadow-sm">
                 </div>
             @endif
         </div>
