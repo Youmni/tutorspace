@@ -1,66 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TutorSpace
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
+TutorSpace is a community-driven learning platform that connects students and tutors to enhance the learning experience.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Functions
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Admin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Institutions
+- **Add an Institution:**  
+  Admins can add new institutions to the TutorSpace platform, broadening the available learning network.  
+- **Update or Delete an Institution:**  
+  Admins can update the details of existing institutions or remove them as needed.
 
-## Learning Laravel
+#### Courses
+- **Add a Course:**  
+  Admins can create new courses under specific institutions, expanding the range of learning opportunities.  
+- **Update or Delete a Course:**  
+  Admins can update course details or remove courses that are no longer relevant.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Users
+- **View User Information:**  
+  Admins can access detailed user profiles, including the courses they are tutoring.  
+- **Manually Create Users:**  
+  Admins can manually create user accounts for better control over platform access.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Announcements
+- **Create Announcements:**  
+  Admins can create announcements to share important updates or information with users.  
+- **Update Announcements:**  
+  Admins can update existing announcements to ensure users are informed of any changes.  
+- **Delete Announcements:**  
+  Admins can delete outdated or irrelevant announcements from the platform.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### FAQ Management
+- **Add FAQ Categories and Questions:**  
+  Admins can create new FAQ categories and add questions to assist users with common queries.  
+- **Update or Remove FAQ Categories and Questions:**  
+  Admins can modify or delete outdated FAQ categories and questions to maintain the accuracy of information.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### User
 
-### Premium Partners
+#### Courses
+- **View Courses:**  
+  Users can browse and view available courses to find relevant learning opportunities. They can also contact tutors for more information.
+- **Become a Tutor:**  
+  Users can apply to become a tutor for specific courses offered by certain institutions.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### Announcements
+- **View Announcements:**  
+  Users can view the latest announcements from the platform to stay informed about updates and changes.
 
-## Contributing
+#### FAQ
+- **View FAQ:**  
+  Users can access the FAQ section for helpful information and answers to common questions.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Contact
+- **Email Support:**  
+  Users can contact the TutorSpace administrators via email to report issues or provide feedback and suggestions.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Installation
 
-## Security Vulnerabilities
+### Requirements
+- **PHP** (version 8 or higher)
+- **Node.js** (version 20 or higher)
+- **Windows Subsystem for Linux (WSL)** (if on Windows)
+- **MySQL** (or another database of your choice)
+- **Composer** (for managing PHP dependencies)
+- **Webserver** (e.g., Apache, Nginx, or PHP's built-in server)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Setup Instructions
 
-## License
+1. **Clone the project from GitHub**:
+   - Clone the repository to your local machine using:
+     ```bash
+     git clone <repository-url>
+     ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Navigate to the project directory**:
+   - Go to the `/tutorspace` directory:
+     ```bash
+     cd tutorspace
+     ```
+
+3. **Install PHP dependencies**:
+   - Run Composer to install the necessary PHP dependencies:
+     ```bash
+     composer install
+     ```
+
+4. **Create the `.env` file**:
+   - Copy the example environment file and update it with your database credentials and email information (including `MAIL_ADMIN_ADDRESS`):
+     ```bash
+     cp .env.example .env
+     ```
+   - Edit the `.env` file and configure the following:
+     - **Database connection**: Set your `DB_*` variables (e.g., `DB_CONNECTION`, `DB_HOST`, `DB_DATABASE`, etc.).
+     - **Mail configuration**: Set the `MAIL_*` variables, including `MAIL_ADMIN_ADDRESS`.
+
+5. **Generate the application key**:
+   - Laravel requires an application key for secure encryption. Generate it using:
+     ```bash
+     php artisan key:generate
+     ```
+
+6. **Install Node.js dependencies**:
+   - Run the following command to install frontend dependencies:
+     ```bash
+     npm install
+     ```
+
+7. **Build the frontend assets**:
+   - Build the assets for production using:
+     ```bash
+     npm run build
+     ```
+
+8. **Run database migrations (with optional seeders)**:
+   - Set up the database by running migrations, and optionally, seed the database with:
+     ```bash
+     php artisan migrate:fresh --seed
+     ```
+
+9. **Start the development servers**:
+   - Run the PHP and Node.js development servers to start the application locally:
+     ```bash
+     php artisan serve && npm run dev
+     ```
+
+After completing these steps, your application should be set up and running locally. You can now access it via the provided local server URL (typically `http://localhost:8000`).
+
+---
+
+## Technologies
+1. **Laravel**: Used for building the backend and frontend of the application.
+2. **MySQL**: Used for managing the database.
+3. **Tailwind CSS**: Used for styling.
+
+---
+
+## Sources
+- [Chart.js - YouTube Tutorial](https://youtu.be/Bb2n7RlgGVM?si=VQAMiiGg_ZPaXt-M)
+- [Chart.js Documentation - W3Schools](https://www.w3schools.com/ai/ai_chartjs.asp)
+
+## Extra information
+Some of the CSS was done directly with Copilot.  
+
+## Author
+- [@Youmni Malha](https://github.com/Youmni)
+
+---
