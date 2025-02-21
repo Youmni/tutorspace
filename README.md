@@ -127,15 +127,21 @@ TutorSpace is a community-driven learning platform that connects students and tu
      ```bash
      php artisan migrate:fresh --seed
      ```
-
-9. **Start the development servers**:
+9. **Create a symbolic link for public storage**:
+   - To access files from the `storage` directory in the browser, run the following command:
+     ```bash
+     php artisan storage:link
+     ```
+10. **Start the development servers**:
    - Run the PHP and Node.js development servers to start the application locally:
      ```bash
-     php artisan serve && npm run dev
+     php artisan serve & npm run dev
      ```
+11. **Recommended Image Setup:**
 
-After completing these steps, your application should be set up and running locally. You can now access it via the provided local server URL (typically `http://localhost:8000`).
-
+- Place a `placeholder.jpg` image in the `storage/app/public/images/` directory.
+- Place a `default.jpg` image in the `storage/app/public/profile_pictures/` directory.
+> These images will serve as fallback options in case no custom images are available.
 ---
 
 ## Technologies
