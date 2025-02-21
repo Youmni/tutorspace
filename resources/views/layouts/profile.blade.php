@@ -74,6 +74,12 @@
                         Security
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('profile.chats.index', ['conversation' => 2]) }}" class="flex items-center gap-4 p-4 rounded-md hover:text-white hover:bg-black transition-colors text-lg w-full {{ request()->routeIs('admin.courses.index') ? 'bg-white text-black' : '' }}">
+                        <span class="material-icons">chat</span>
+                        Chats
+                    </a>
+                </li>
             </ul>
         </nav>
 

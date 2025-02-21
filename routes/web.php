@@ -15,6 +15,9 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserCourseController;
 use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\FAQController;
+use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\Chat\MessageController;
+
 use App\Http\Controllers\Auth\PasswordController;
 
 
@@ -63,11 +66,18 @@ Route::middleware('auth')->group(function () {
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::get('/security', [ProfileController::class, 'edit'])->name('security');
 
+        Route::prefix('chats')->name('chats.')->group(function () {
+            Route::get('/', [ChatController::class, 'index'])->name('index');
+            Route::get('/{conversation}', [ChatController::class, 'show'])->name('show');
+            Route::post('/{conversation}/message', [MessageController::class, 'store'])->name('message.store');
+
+            Route::get('/start/{tutorId}', [ChatController::class, 'startOrOpen'])->name('startOrOpen');
+        });
     });
 
+
+
     Route::get('/password', [PasswordController::class, 'update'])->name('password.update');
-
-
     Route::delete('/{id}', [UserCourseController::class, 'destroy'])->name('tutor_course.destroy');
 });
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TutorSpace</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     @vite('resources/css/app.css')
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
@@ -22,12 +23,7 @@
                 />
             </form>
 
-            <ul class="flex items-center gap-6">
-                <li>
-                    <a href="{{ route('home.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
-                        Home
-                    </a>
-                </li>
+            <ul class="flex flex-wrap items-center gap-6 md:flex-nowrap md:gap-6">
                 <li>
                     <a href="{{ route('courses.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Courses
@@ -83,6 +79,7 @@
                     @endauth
                 @endif
             </ul>
+
         </nav>
     </header>
 
