@@ -27,6 +27,20 @@ class CourseController extends Controller
             
         return view('admin.course.courses', compact('courses'));
     }
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        
+        $courses = Course::with('institution')
+                        ->where('title', 'LIKE', '%' . $query . '%')
+                        ->orWhereHas('institution', function ($q) use ($query) {
+                            $q->where('name', 'LIKE', '%' . $query . '%');
+                        })
+                        ->get();
+
+        return response()->json(['courses' => $courses]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

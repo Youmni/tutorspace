@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="flex flex-col p-4">
-<h1 class="text-4xl font-bold text-center text-indigo-600 mb-6">Courses</h1>
+    <h1 class="text-4xl font-bold text-center text-indigo-600 mb-6">Courses</h1>
+    
     <form method="GET" action="{{ route('courses.index') }}" class="space-y-4 md:space-y-0 md:flex md:gap-4 mb-4">
         <div class="flex-1">
             <label for="search" class="block text-sm font-medium text-gray-700">Search by course name or institution</label>
@@ -26,6 +27,10 @@
                         <p class="text-gray-500">Country: {{ $course->institution->country }}</p>
                     </a>
                 @endforeach
+            </div>
+            
+            <div class="mt-6">
+                {{ $courses->links() }}
             </div>
         @endif
     </main>

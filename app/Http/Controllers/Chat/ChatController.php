@@ -40,6 +40,10 @@ class ChatController extends Controller
     public function startOrOpen($tutorId)
     {
         $userId = Auth::id();
+
+        if($userId == $tutorId) {
+            return redirect()->route('profile.chats.index')->with('error', 'You cannot chat with yourself.');
+        }
     
         $conversation = Conversation::whereHas('users', function ($query) use ($userId) {
                 $query->where('conversation_user.user_id', $userId);
@@ -81,16 +85,13 @@ class ChatController extends Controller
      */
     public function show($conversationId)
     {
-        Log::info('Conversation info:', ['id' => $conversationId]);
-
         $conversation = Conversation::find($conversationId);
     
-        // Log the conversation details
-        Log::info('Conversation details:', ['conversation' => $conversation]);
     
         if (!$conversation->users->contains('user_id', auth()->id())) {
             return redirect()->route('profile.chats.index')->with('error', 'You are not authorized to view this conversation.');
         }
+
     
         $messages = $conversation->messages()->orderBy('created_at', 'asc')->get(); 
         return view('user.chat.show', compact('conversation', 'messages'));

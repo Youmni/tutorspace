@@ -17,8 +17,10 @@ use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\FAQController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Chat\MessageController;
-
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReservationUserController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\User\ClientController;
 
 
 
@@ -37,7 +39,10 @@ Route::prefix('courses')->name('courses.')->group(function () {
     Route::get('/{id}', [UserCourseController::class, 'showTutors'])->name('tutors');
     Route::post('/{id}', [UserCourseController::class, 'store'])->name('storeTutor');
     Route::get('/tutor/{id}', [UserCourseController::class, 'create'])->name('createTutor');
+    Route::get('/search', [CourseController::class, 'search'])->name('search');
 });
+Route::get('/client/search', [ClientController::class, 'searchUser'])->name('client.search');
+
 
 
 Route::prefix('home')->name('home.')->group(function () {
@@ -59,26 +64,35 @@ Route::prefix('contact')->name('contact.')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('index');
-        Route::put('/', [ProfileController::class, 'updateProfile'])->name('update.profile');
-        Route::get('/course', [ProfileController::class, 'courses'])->name('courses');
-        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
-        Route::patch('/', [ProfileController::class, 'update'])->name('update');
-        Route::get('/security', [ProfileController::class, 'edit'])->name('security');
+        Route::get('/', [ProfileController::class, 'index'])->name('index'); // Profiel overzicht
+        Route::put('/', [ProfileController::class, 'updateProfile'])->name('update.profile'); // Profiel bijwerken
+        Route::get('/course', [ProfileController::class, 'courses'])->name('courses'); // Cursussen overzicht
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy'); // Profiel verwijderen
+        Route::patch('/', [ProfileController::class, 'update'])->name('update'); // Profiel update actie
+        Route::get('/security', [ProfileController::class, 'edit'])->name('security'); // Beveiligingsinstellingen
 
         Route::prefix('chats')->name('chats.')->group(function () {
-            Route::get('/', [ChatController::class, 'index'])->name('index');
-            Route::get('/{conversation}', [ChatController::class, 'show'])->name('show');
-            Route::post('/{conversation}/message', [MessageController::class, 'store'])->name('message.store');
+            Route::get('/', [ChatController::class, 'index'])->name('index'); // Lijst van gesprekken
+            Route::get('/{conversation}', [ChatController::class, 'show'])->name('show'); // Specifiek gesprek tonen
+            Route::post('/{conversation}/message', [MessageController::class, 'store'])->name('message.store'); // Bericht versturen in een gesprek
+            Route::get('/start/{tutorId}', [ChatController::class, 'startOrOpen'])->name('startOrOpen'); // Start of open gesprek met tutor
+        });
 
-            Route::get('/start/{tutorId}', [ChatController::class, 'startOrOpen'])->name('startOrOpen');
+        Route::prefix('reservations')->name('reservations.')->group(function () {
+            Route::get('/', [ReservationUserController::class, 'index'])->name('index'); // Alle reserveringen ophalen van de ingelogde gebruiker
+            Route::get('/{reservation}', [ReservationUserController::class, 'show'])->name('show'); // Specifieke reservering ophalen
+            Route::patch('/{reservation}/status', [ReservationController::class, 'updateStatus'])->name('updateStatus');
+            Route::get('/create', [ReservationController::class, 'create'])->name('create'); // Formulier voor het aanmaken van een reservering
+            Route::put('/{id}', [ReservationController::class, 'update'])->name('update'); // Reservering bijwerken
+            Route::get('/{id}/edit', [ReservationController::class, 'edit'])->name('edit'); // Formulier voor het bewerken van een reservering
         });
     });
 
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store'); // Reservering opslaan
+    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy'); // Reservering verwijderen
 
-
-    Route::get('/password', [PasswordController::class, 'update'])->name('password.update');
-    Route::delete('/{id}', [UserCourseController::class, 'destroy'])->name('tutor_course.destroy');
+    Route::get('/password', [PasswordController::class, 'update'])->name('password.update'); // Wachtwoord wijzigen
+    Route::delete('/{id}', [UserCourseController::class, 'destroy'])->name('tutor_course.destroy'); // Cursus van een tutor verwijderen
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

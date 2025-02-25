@@ -10,7 +10,7 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
     <header class="shadow-lg bg-white border">
-        <nav class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4">
+    <nav class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4">
             <a href="{{ route('home.index') }}" class="text-2xl font-bold text-gray-900">TutorSpace</a>
             <form method="get" action="{{ route('courses.index') }}" class="flex items-center gap-2 mt-4 md:mt-0">
                 <span class="material-icons text-gray-500">search</span>
@@ -23,33 +23,63 @@
                 />
             </form>
 
-            <ul class="flex gap-6 mt-4 md:mt-0">
-                <li>
-                    <a href="{{ route('home.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
-                        Home
-                    </a>
-                </li>
+            <ul class="flex flex-wrap items-center gap-6 md:flex-nowrap md:gap-6">
                 <li>
                     <a href="{{ route('courses.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Courses
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-gray-700 hover:text-blue-500 transition-colors">
+                    <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         Contact
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('faq.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
+                    <a href="{{ route('faq.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
                         FAQ
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-blue-500 transition-colors">
-                        Profile
-                    </a>
-                </li>
+                @if (Route::has('login'))
+                    @auth
+                        <li>
+                            <a
+                                href="{{ route('profile.index') }}"
+                                class="rounded-md px-3 py-2 text-gray-700 transition hover:text-blue-500"
+                            >
+                                Profile
+                            </a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" class="w-full">
+                                @csrf
+                                <button type="submit" class="rounded-md text-red-600 hover:text-red-800 transition-colors">
+                                    | Logout
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li>
+                            <a
+                                href="{{ route('login') }}"
+                                class="rounded-md px-3 py-2 bg-blue-500 text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                Log in
+                            </a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li>
+                                <a
+                                    href="{{ route('register') }}"
+                                    class="rounded-md px-3 py-2 bg-blue-500 text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    Register
+                                </a>
+                            </li>
+                        @endif
+                    @endauth
+                @endif
             </ul>
+
         </nav>
     </header>
     <hr>
@@ -78,6 +108,12 @@
                     <a href="{{ route('profile.chats.index', ['conversation' => 2]) }}" class="flex items-center gap-4 p-4 rounded-md hover:text-white hover:bg-black transition-colors text-lg w-full {{ request()->routeIs('admin.courses.index') ? 'bg-white text-black' : '' }}">
                         <span class="material-icons">chat</span>
                         Chats
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('profile.reservations.index', ['conversation' => 2]) }}" class="flex items-center gap-4 p-4 rounded-md hover:text-white hover:bg-black transition-colors text-lg w-full {{ request()->routeIs('admin.courses.index') ? 'bg-white text-black' : '' }}">
+                        <span class="material-icons">calendar_today</span>
+                        Reservations
                     </a>
                 </li>
             </ul>

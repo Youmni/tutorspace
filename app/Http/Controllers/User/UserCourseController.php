@@ -20,6 +20,7 @@ class UserCourseController extends Controller
         $search = $request->input('search');
         $institution_id = $request->input('institution');
         $country = $request->input('country');
+        
         $courses = Course::query()
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'LIKE', "%{$search}%")
@@ -28,13 +29,14 @@ class UserCourseController extends Controller
                                  $query->where('name', 'LIKE', "%{$search}%");
                              });
             })
-            ->get();
-
+            ->paginate(9);
+    
         $institutions = Institution::all();
         $countries = Institution::distinct()->pluck('country');
-
+    
         return view('user.course.courses', compact('courses', 'institutions', 'countries'));
     }
+    
 
     public function showTutors($id)
     {
