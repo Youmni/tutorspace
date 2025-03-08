@@ -44,7 +44,7 @@
     @if($reservations->isEmpty())
         <p class="text-gray-500">No reservations available.</p>
     @else
-        <div class="overflow-x-auto">
+        <div class="overflow-y-auto max-h-96 border rounded">
             <table class="min-w-full bg-white border border-gray-200">
                 <thead>
                     <tr class="bg-gray-100">

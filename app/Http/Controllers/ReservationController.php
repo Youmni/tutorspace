@@ -8,8 +8,9 @@ use App\Models\User;
 use App\Models\Reservation; 
 use App\Models\TutorCourse;
 use Illuminate\Support\Facades\Auth;
-use App\Events\ReservationCreated;
-
+use App\Mail\ReservationCreatedTutor;
+use App\Mail\ReservationCreatedParticipant;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -79,8 +80,11 @@ class ReservationController extends Controller
         $data = $request->all();
         $data['tutor_id'] = Auth::id();
     
-        Reservation::create($data);
-    
+        $reservation = Reservation::create($data);
+        $reservation->load(['tutor', 'participant', 'course']);
+        Mail::to($reservation->tutor->email)->send(new ReservationCreatedTutor($reservation));
+        Mail::to($reservation->participant->email)->send(new ReservationCreatedParticipant($reservation));
+
         return redirect()->route('profile.reservations.index')->with('success', 'Reservation created successfully');
     }
     

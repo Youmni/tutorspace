@@ -77,7 +77,7 @@
 
         <!-- Prijs -->
         <div class="mb-4">
-            <x-input-label for="price" :value="__('Price')" />
+            <x-input-label for="price" :value="__('Price (€)')" />
             <input id="price" name="price" type="number" step="0.01" value="{{ old('price', $reservation->price) }}" class="block mt-1 w-full rounded border-gray-300" />
             <x-input-error :messages="$errors->get('price')" class="mt-2" />
         </div>
