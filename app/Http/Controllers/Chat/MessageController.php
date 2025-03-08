@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
 use App\Models\Conversation;
+use App\Events\MessageSent;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class MessageController extends Controller
     public function store(Request $request, Conversation $conversation)
     {
         $request->validate([
-            'message' => 'required|string',
+            'message' => 'required|string|max:256',
             'attachment' => 'nullable|file|mimes:jpg,jpeg,png,gif,mp4,avi,mov|max:20480'
         ]);
     
@@ -47,7 +48,7 @@ class MessageController extends Controller
         }
     
         $message->save();
-    
+        event(new MessageSent($message));
         return redirect()->back()->with('success', 'Message sent!');
     }
     

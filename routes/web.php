@@ -76,19 +76,21 @@ Route::middleware('auth')->group(function () {
             Route::get('/{conversation}', [ChatController::class, 'show'])->name('show'); // Specifiek gesprek tonen
             Route::post('/{conversation}/message', [MessageController::class, 'store'])->name('message.store'); // Bericht versturen in een gesprek
             Route::get('/start/{tutorId}', [ChatController::class, 'startOrOpen'])->name('startOrOpen'); // Start of open gesprek met tutor
+            Route::post('/{conversation}/typing', [ChatController::class, 'typing'])->name('conversation.typing');
         });
+        
 
         Route::prefix('reservations')->name('reservations.')->group(function () {
             Route::get('/', [ReservationUserController::class, 'index'])->name('index'); // Alle reserveringen ophalen van de ingelogde gebruiker
             Route::get('/{reservation}', [ReservationUserController::class, 'show'])->name('show'); // Specifieke reservering ophalen
             Route::patch('/{reservation}/status', [ReservationController::class, 'updateStatus'])->name('updateStatus');
-            Route::get('/create', [ReservationController::class, 'create'])->name('create'); // Formulier voor het aanmaken van een reservering
+            Route::get('/create', [ReservationUserController::class, 'create'])->name('create'); // Formulier voor het aanmaken van een reservering
+            Route::post('/reservations', [ReservationController::class, 'store'])->name('store'); // Reservering opslaan
             Route::put('/{id}', [ReservationController::class, 'update'])->name('update'); // Reservering bijwerken
             Route::get('/{id}/edit', [ReservationController::class, 'edit'])->name('edit'); // Formulier voor het bewerken van een reservering
         });
     });
 
-    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store'); // Reservering opslaan
     Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy'); // Reservering verwijderen
 
     Route::get('/password', [PasswordController::class, 'update'])->name('password.update'); // Wachtwoord wijzigen

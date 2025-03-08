@@ -16,10 +16,19 @@
 
         <div class="space-y-2">
             <x-input-label for="profile_photo" :value="__('Profile Picture')" />
-            <input type="file" name="profile_photo" id="profile_photo" class="block w-full px-3 py-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <input type="file" name="profile_photo" id="profile_photo" accept="image/*"
+                class="block w-full px-3 py-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                onchange="previewImage(event)">
+            
+            <div class="mt-4">
+                <img id="image_preview" class="w-32 h-32 rounded-full border border-gray-300 shadow-sm hidden" alt="Preview Image">
+            </div>
+
             @if ($user->profile_photo)
-                <div class="mt-4">
-                <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : asset('storage/images/default.jpg') }}" alt="Profile Picture" class="w-32 h-32 rounded-full border border-gray-300 shadow-sm">
+                <div class="mt-4" id="current_image_container">
+                    <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : asset('storage/images/default.jpg') }}"
+                        alt="Profile Picture" 
+                        class="w-32 h-32 rounded-full border border-gray-300 shadow-sm">
                 </div>
             @endif
         </div>
@@ -62,4 +71,31 @@
     </form>
 
 </div>
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('image_preview');
+        const currentImageContainer = document.getElementById('current_image_container');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                
+                if (currentImageContainer) {
+                    currentImageContainer.classList.add('hidden');
+                }
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.src = '';
+            preview.classList.add('hidden');
+            
+            if (currentImageContainer) {
+                currentImageContainer.classList.remove('hidden');
+            }
+        }
+    }
+</script>
 @endsection

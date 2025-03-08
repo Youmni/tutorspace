@@ -12,7 +12,7 @@
         Back
     </a>
     <h1 class="text-3xl font-extrabold text-center text-indigo-600 mb-8">Nieuwe Reservering</h1>
-    <form action="{{ route('reservations.store') }}" method="POST" class="bg-white shadow-lg rounded-lg p-6" id="reservation-form">
+    <form action="{{ route('profile.reservations.store') }}" method="POST" class="bg-white shadow-lg rounded-lg p-6" id="reservation-form">
         @csrf
 
         <!-- Cursus selecteren -->
@@ -48,10 +48,6 @@
 
             <x-input-error :messages="$errors->get('participant_id')" class="mt-2 text-red-500" />
         </div>
-
-
-
-
 
         <!-- Starttijd -->
         <div class="mb-4">
@@ -91,6 +87,7 @@
             <select id="payment_status" name="payment_status" class="block w-full mt-1 rounded border-gray-300" required>
                 <option value="pending" {{ old('payment_status') == 'pending' ? 'selected' : '' }}>In afwachting</option>
                 <option value="paid" {{ old('payment_status') == 'paid' ? 'selected' : '' }}>Betaald</option>
+                <option value="canceled" {{ old('payment_status') == 'canceled' ? 'selected' : '' }}>Geannuleerd</option>
             </select>
             <x-input-error :messages="$errors->get('payment_status')" class="mt-2" />
         </div>

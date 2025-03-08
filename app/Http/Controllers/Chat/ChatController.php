@@ -25,17 +25,28 @@ class ChatController extends Controller
                 $query->where('users.user_id', '!=', $userId);
             }])
             ->with(['messages' => function ($query) {
-                $query->latest();
+                $query->orderBy('created_at', 'asc');
             }])
             ->get()
             ->sortByDesc(function ($conversation) {
-                return $conversation->messages->first()->created_at ?? now();
+                return $conversation->messages->last()->created_at ?? now();
             });
     
         return view('user.chat.index', compact('conversations'));
     }
     
-    
+    public function typing(Request $request, Conversation $conversation)
+    {
+        $isTyping = $request->input('typing', false);
+
+        broadcast(new UserTyping(
+            $conversation->id,
+            auth()->id(),
+            $isTyping
+        ))->toOthers();
+
+        return response()->json(['status' => 'ok']);
+    }
 
     public function startOrOpen($tutorId)
     {

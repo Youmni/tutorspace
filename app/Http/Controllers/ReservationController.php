@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Reservation; 
 use App\Models\TutorCourse;
 use Illuminate\Support\Facades\Auth;
+use App\Events\ReservationCreated;
 
 
 class ReservationController extends Controller
@@ -28,8 +29,8 @@ class ReservationController extends Controller
             $search = $request->search_client;
             $clientsQuery->where(function($query) use ($search) {
                 $query->where('user_id', 'LIKE', "%$search%")
-                      ->orWhere('first_name', 'LIKE', "%$search%")
-                      ->orWhere('last_name', 'LIKE', "%$search%");
+                    ->orWhere('first_name', 'LIKE', "%$search%")
+                    ->orWhere('last_name', 'LIKE', "%$search%");
             });
         }
     
@@ -49,9 +50,6 @@ class ReservationController extends Controller
     
         return redirect()->route('profile.reservations.index')->with('success', 'Status updated successfully');
     }
-    
-
-
 
     public function store(Request $request)
     {
